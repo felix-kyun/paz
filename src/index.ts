@@ -7,11 +7,6 @@ import { httpLogger } from "./utils/logger/httpLogger.js";
 
 const app: Express = express();
 
-/* start server */
-logger.info("Starting server...");
-
-/* import Routers */
-
 /* Middleware */
 app.use(cors());
 app.use(helmet());
@@ -32,7 +27,7 @@ app.get("/", async (_req, res) => res.send("Hello"));
 /* Start Server */
 if (ENV !== "test")
     app.listen(PORT, () => {
-        logger.info(`Server started on 127.0.0.1:${PORT}`);
+        logger.info(`Server started on port ${PORT}`);
     });
 
 export default app;

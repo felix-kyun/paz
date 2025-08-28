@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import { parseNumber } from "../parseNumber.js";
 
 // load env file according to NODE_ENV
 const ext = {
@@ -18,6 +19,6 @@ config({
     quiet: true,
 });
 
-export const PORT = Number(process.env.PORT) ?? 3000;
+export const PORT = parseNumber(process.env.PORT, 3000);
 export const LOGFILE = process.env.LOGFILE ?? "app.log";
 export const LOG_LEVEL = process.env.LOG_LEVEL ?? "info";
