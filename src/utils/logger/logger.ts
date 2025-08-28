@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import { join } from "path";
-import { __dirname, ENV, LOG_LEVEL, LOGFILE } from "../config/config.js";
+import { __dirname, ENV, LOG_LEVEL, LOGFILE } from "@config";
 import pino, {
     type Logger,
     type LoggerOptions,

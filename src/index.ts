@@ -1,8 +1,8 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { ENV, PORT } from "@utils/config/config.js";
-import { logger } from "@utils/logger/logger.js";
+import { ENV, PORT } from "@config";
+import { logger } from "@logger";
 import { httpLogger } from "./utils/logger/httpLogger.js";
 
 const app: Express = express();
