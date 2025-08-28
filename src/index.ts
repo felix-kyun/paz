@@ -1,8 +1,38 @@
-import express from "express";
+import express, { type Express } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import { ENV, PORT } from "@utils/config/config.js";
+import { logger } from "@utils/logger/logger.js";
+import { httpLogger } from "./utils/logger/httpLogger.js";
 
-const app = express();
-const PORT = 5000;
+const app: Express = express();
 
+/* start server */
+logger.info("Starting server...");
+
+/* import Routers */
+
+/* Middleware */
+app.use(cors());
+app.use(helmet());
+app.use(express.json());
+app.use(httpLogger);
+
+/* Routes */
 app.get("/", async (_req, res) => res.send("Hello"));
 
-app.listen(PORT, () => console.log(`Server started on 127.0.0.1:${PORT}`));
+/* Testing Routes */
+
+/* Not Found  */
+
+/* Error Handler */
+
+/* MongoDB Connection */
+
+/* Start Server */
+if (ENV !== "test")
+    app.listen(PORT, () => {
+        logger.info(`Server started on 127.0.0.1:${PORT}`);
+    });
+
+export default app;
