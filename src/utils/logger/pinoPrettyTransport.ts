@@ -1,8 +1,24 @@
-import type { TransportSingleOptions } from "pino";
+import PinoPretty, { type PrettyOptions } from "pino-pretty";
 
-export const pinoPrettyTransport: TransportSingleOptions = {
-    target: "pino-pretty",
-    options: {
-        colorize: true,
-    },
-};
+export default (opts: PrettyOptions) =>
+    PinoPretty({
+        ...opts,
+        customPrettifiers: {
+            time: (time) => {
+                return time.toString().split(".")[0] ?? time.toString();
+            },
+
+            level: (level) => {
+                const levels: Record<string, string> = {
+                    60: "💀",
+                    50: "🚨",
+                    40: "⚠️",
+                    30: "✨",
+                    20: "🐛",
+                    10: "🔍",
+                };
+
+                return levels[level.toString()] || level.toString();
+            },
+        },
+    });
