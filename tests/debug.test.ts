@@ -1,0 +1,20 @@
+import request from "supertest";
+import { describe, it, expect } from "vitest";
+import app from "@/index.js";
+
+describe("Test for debug mode", () => {
+    it("should return 200 for /debug route in development mode", async () => {
+        const response = await request(app).get("/debug/vars");
+        expect(response.status).toBe(200);
+    });
+
+    it("should provide config variables in response", async () => {
+        const response = await request(app).get("/debug/vars");
+        expect(Object.keys(response.body).length).toBeGreaterThan(0);
+    });
+
+    it("env should be set to 'test' during testing", async () => {
+        const response = await request(app).get("/debug/vars");
+        expect(response.body.ENV).toBe("test");
+    });
+});

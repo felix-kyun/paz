@@ -1,0 +1,1 @@
+GET localhost:3000/debug/vars HTTP/1.1
