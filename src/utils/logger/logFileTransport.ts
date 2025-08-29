@@ -1,4 +1,4 @@
-import { type TransportSingleOptions } from "pino";
+import type { TransportSingleOptions } from "pino";
 import { __dirname, LOGFILE } from "../config/config.js";
 import { join } from "path";
 

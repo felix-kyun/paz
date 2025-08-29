@@ -6,8 +6,8 @@
         "outDir": "./dist",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"]
-            "@utils/*": ["src/utils/*"]
+            "@/*": ["src/*"],
+            "@utils/*": ["src/utils/*"],
             "@logger": ["src/utils/logger/logger.js"],
             "@config": ["src/utils/config/config.js"]
         },
