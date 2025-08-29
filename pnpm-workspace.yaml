@@ -1,4 +1,4 @@
 onlyBuiltDependencies:
-  - bcrypt
-  - esbuild
-  - unrs-resolver
+    - bcrypt
+    - esbuild
+    - unrs-resolver
