@@ -22,3 +22,6 @@ config({
 export const PORT = parseNumber(process.env.PORT, 3000);
 export const LOGFILE = process.env.LOGFILE ?? "app.log";
 export const LOG_LEVEL = process.env.LOG_LEVEL ?? "info";
+export const JWT_SECRET = process.env.JWT_SECRET ?? "your_jwt_secret";
+export const MONGO_URI =
+    process.env.MONGO_URI ?? "mongodb://localhost:27017/mydb";
