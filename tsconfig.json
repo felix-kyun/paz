@@ -8,6 +8,13 @@
         "paths": {
             "@/*": ["src/*"],
             "@utils/*": ["src/utils/*"],
+            "@errors/*": ["src/errors/*"],
+            "@middlewares/*": ["src/middlewares/*"],
+            "@controllers/*": ["src/controllers/*"],
+            "@routes/*": ["src/routes/*"],
+            "@models/*": ["src/models/*"],
+            "@services/*": ["src/services/*"],
+            "@types/*": ["src/types/*"],
             "@logger": ["src/utils/logger/logger.js"],
             "@config": ["src/utils/config/config.js"]
         },
@@ -45,8 +52,9 @@
         "verbatimModuleSyntax": true,
         "isolatedModules": true,
         "noUncheckedSideEffectImports": true,
+        "useDefineForClassFields": true,
         "moduleDetection": "force",
         "skipLibCheck": true
     },
-    "exclude": ["dist/", "frontend/"]
+    "exclude": ["dist/", "frontend/", "tests/"]
 }
