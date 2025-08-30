@@ -1,0 +1,15 @@
+meta {
+  name: Create User
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{Server}}/users
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}
