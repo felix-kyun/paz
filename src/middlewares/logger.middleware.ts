@@ -11,11 +11,15 @@ export async function loggerMiddleware(
     const log = {
         query: req.query,
         params: req.params,
+        body: undefined,
     };
 
     res.on("finish", () => {
         const duration =
             Number(process.hrtime.bigint() - startTime) / 1_000_000;
+
+        if (req.headers["content-type"] === "application/json" && req.body)
+            log["body"] = req.body;
 
         logger.info(
             {
@@ -29,18 +33,7 @@ export async function loggerMiddleware(
 
     res.on("close", () => {
         if (res.writableEnded) return;
-
-        const duration =
-            Number(process.hrtime.bigint() - startTime) / 1_000_000;
-
-        logger.warn(
-            {
-                ...log,
-                ip: req.ip,
-                headers: req.headers,
-            },
-            `Client aborted after ${duration.toFixed(2)}ms - ${req.method} ${req.originalUrl || req.url}`,
-        );
+        logger.warn("Request aborted by the client");
     });
 
     next();
