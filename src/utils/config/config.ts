@@ -1,5 +1,5 @@
 import { config } from "dotenv";
-import { parseNumber } from "../parseNumber.js";
+import { parseNumber } from "@utils/parseNumber.js";
 
 // load env file according to NODE_ENV
 const ext = {

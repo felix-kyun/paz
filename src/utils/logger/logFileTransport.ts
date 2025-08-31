@@ -1,5 +1,5 @@
 import type { TransportSingleOptions } from "pino";
-import { __dirname, LOGFILE } from "../config/config.js";
+import { __dirname, LOGFILE } from "@config";
 import { join } from "path";
 
 export const logFileTransport: TransportSingleOptions = {

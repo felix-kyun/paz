@@ -1,4 +1,4 @@
-import { logger } from "@/utils/logger/logger.js";
+import { logger } from "@logger";
 import type { NextFunction, Request, Response } from "express";
 
 export async function loggerMiddleware(

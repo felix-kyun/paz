@@ -6,7 +6,8 @@
         "outDir": "./dist",
         "baseUrl": ".",
         "paths": {
-            "@/*": ["src/*"],
+            "@logger": ["src/utils/logger/logger.js"],
+            "@config": ["src/utils/config/config.js"],
             "@utils/*": ["src/utils/*"],
             "@errors/*": ["src/errors/*"],
             "@middlewares/*": ["src/middlewares/*"],
@@ -15,8 +16,7 @@
             "@models/*": ["src/models/*"],
             "@services/*": ["src/services/*"],
             "@types/*": ["src/types/*"],
-            "@logger": ["src/utils/logger/logger.js"],
-            "@config": ["src/utils/config/config.js"]
+            "@/*": ["src/*"]
         },
 
         // Environment Settings

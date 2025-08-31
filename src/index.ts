@@ -6,10 +6,10 @@ import { logger } from "@logger";
 import { notFoundMiddleware } from "@middlewares/notFound.middleware.js";
 import { errorHandler } from "@middlewares/error.middleware.js";
 import { debugRouter } from "@routes/debug.routes.js";
-import { userRouter } from "./routes/user.routes.js";
-import { connectMongo } from "./utils/database/mongo.js";
-import { authRouter } from "./routes/auth.routes.js";
-import { loggerMiddleware } from "./middlewares/logger.middleware.js";
+import { userRouter } from "@routes/user.routes.js";
+import { connectMongo } from "@utils/database/mongo.js";
+import { authRouter } from "@routes/auth.routes.js";
+import { loggerMiddleware } from "@middlewares/logger.middleware.js";
 
 const app: Express = express();
 
