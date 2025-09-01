@@ -10,11 +10,13 @@ describe("Test for debug mode", () => {
 
     it("should provide config variables in response", async () => {
         const response = await request(app).get("/debug/vars");
-        expect(Object.keys(response.body).length).toBeGreaterThan(0);
+        expect(
+            Object.keys(response.body as Record<string, unknown>).length,
+        ).toBeGreaterThan(0);
     });
 
     it("env should be set to 'test' during testing", async () => {
         const response = await request(app).get("/debug/vars");
-        expect(response.body.ENV).toBe("test");
+        expect((response.body as Record<string, unknown>).ENV).toBe("test");
     });
 });

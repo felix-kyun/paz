@@ -7,6 +7,8 @@ describe("Test for non-existing routes", () => {
         const response = await request(app).get("/non-existing-route");
         expect(response.status).toBe(404);
         expect(response.body).toHaveProperty("message");
-        expect(response.body.message).toContain("Not Found");
+        expect((response.body as Record<string, unknown>).message).toContain(
+            "Not Found",
+        );
     });
 });

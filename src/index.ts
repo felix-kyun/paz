@@ -20,7 +20,7 @@ app.use(helmet());
 app.use(express.json());
 
 /* Routes */
-app.get("/", async (_req, res) => res.send("Hello"));
+app.get("/", (_req, res) => res.send("Hello"));
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 

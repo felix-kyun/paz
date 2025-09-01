@@ -6,6 +6,7 @@ export default (opts: PrettyOptions) =>
         ...opts,
         customPrettifiers: {
             time: (time) => {
+                // eslint-disable-next-line @typescript-eslint/no-base-to-string
                 return time.toString().split(".")[0] ?? time.toString();
             },
 
@@ -19,7 +20,8 @@ export default (opts: PrettyOptions) =>
                     10: "🔍",
                 };
 
-                return levels[level.toString()] || level.toString();
+                // eslint-disable-next-line @typescript-eslint/no-base-to-string
+                return levels[level.toString()] ?? level.toString();
             },
         },
     });

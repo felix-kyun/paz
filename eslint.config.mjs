@@ -1,30 +1,26 @@
-import js from "@eslint/js";
-import globals from "globals";
 import tseslint from "typescript-eslint";
-import json from "@eslint/json";
-import { defineConfig } from "eslint/config";
-import path from "path";
+import eslint from "@eslint/js";
+import { globalIgnores } from "eslint/config";
 
-export default defineConfig([
+export default tseslint.config(
+    eslint.configs.recommended,
+    tseslint.configs.recommendedTypeChecked,
+    tseslint.configs.stylisticTypeChecked,
     {
-        files: ["**/*.{js,mjs,cjs}"],
-        plugins: { js },
-        extends: ["js/recommended"],
-        languageOptions: { globals: globals.node },
-    },
-    {
-        files: ["**/*.{ts}"],
-        ...tseslint.configs.recommendedTypeChecked,
         languageOptions: {
             parserOptions: {
-                project: path.resolve("./tsconfig.json"),
+                projectService: true,
+                tsconfigRootDir: import.meta.dirname,
             },
         },
     },
+    globalIgnores(["eslint.config.mjs", "dist/**/*", "vite.config.js"]),
     {
-        files: ["**/*.json"],
-        plugins: { json },
-        language: "json/json",
-        extends: ["json/recommended"],
+        rules: {
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                { argsIgnorePattern: "^_" },
+            ],
+        },
     },
-]);
+);

@@ -6,8 +6,18 @@ meta {
 
 post {
   url: {{Server}}/users
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "name": "felix",
+    "username": "Felix Kyun",
+    "email": "iamfelixkyun@gmail.com",
+    "age": 20,
+    "password": "felixkyun"
+  }
 }
 
 settings {

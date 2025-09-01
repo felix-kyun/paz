@@ -6,8 +6,15 @@ meta {
 
 post {
   url: {{Server}}/auth/login
-  body: none
+  body: json
   auth: inherit
+}
+
+body:json {
+  {
+    "username": "felix",
+    "password": "felix"
+  }
 }
 
 settings {

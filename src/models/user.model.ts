@@ -46,6 +46,7 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
 });
 
 userSchema.methods.comparePassword = async function (
+    this: IUser,
     candidatePassword: string,
 ): Promise<boolean> {
     return bcrypt.compare(candidatePassword, this.password);
@@ -62,4 +63,4 @@ userSchema.pre<IUser>("save", async function (next) {
     }
 });
 
-export const User: Model<IUser> = model<IUser>("User", userSchema, "anitsu");
+export const User: Model<IUser> = model<IUser>("User", userSchema);

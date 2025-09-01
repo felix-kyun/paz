@@ -1,17 +1,17 @@
 import { logger } from "@logger";
 import type { NextFunction, Request, Response } from "express";
 
-export async function loggerMiddleware(
+export function loggerMiddleware(
     req: Request,
     res: Response,
     next: NextFunction,
-): Promise<void> {
+): void {
     const startTime = process.hrtime.bigint();
 
     const log = {
         query: req.query,
         params: req.params,
-        body: undefined,
+        body: undefined as unknown,
     };
 
     res.on("finish", () => {
@@ -19,7 +19,7 @@ export async function loggerMiddleware(
             Number(process.hrtime.bigint() - startTime) / 1_000_000;
 
         if (req.headers["content-type"] === "application/json" && req.body)
-            log["body"] = req.body;
+            log.body = req.body;
 
         logger.info(
             {

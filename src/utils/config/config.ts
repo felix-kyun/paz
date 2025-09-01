@@ -2,7 +2,7 @@ import { config } from "dotenv";
 import { parseNumber } from "@utils/parseNumber.js";
 
 // load env file according to NODE_ENV
-const ext = {
+const ext: Record<string, string> = {
     development: ".dev.env",
     production: ".env",
     test: ".test.env",
@@ -14,7 +14,6 @@ export const ENV: string = process.env.NODE_ENV ?? "development";
 
 /* load config file */
 config({
-    // @ts-ignore
     path: ext[ENV] ?? ".env",
     quiet: true,
 });
