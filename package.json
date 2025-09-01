@@ -12,7 +12,7 @@
         "prepare": "husky",
         "lint": "eslint . --ext .ts",
         "lint:fix": "eslint . --ext .ts --fix",
-        "lint:watch": "chokidar 'src/**/*.ts' -c 'pnpm lint'",
+        "lint:watch": "chokidar . -i 'node_modules' --initial -c 'pnpm lint'",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "typecheck": "tsc --noEmit",
