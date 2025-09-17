@@ -10,12 +10,16 @@ import { userRouter } from "@routes/user.routes.js";
 import { connectMongo } from "@utils/database/mongo.js";
 import { authRouter } from "@routes/auth.routes.js";
 import { loggerMiddleware } from "@middlewares/logger.middleware.js";
+import { connectRedis } from "@utils/database/redis.js";
+import cookieParser from "cookie-parser";
 
+logger.info("Starting server...");
 const app: Express = express();
 
 /* Middleware */
 app.use(loggerMiddleware);
 app.use(cors());
+app.use(cookieParser());
 app.use(helmet());
 app.use(express.json());
 
@@ -34,6 +38,7 @@ app.use(errorHandler);
 
 /* Database Connection */
 await connectMongo();
+await connectRedis();
 
 /* Start Server */
 if (ENV !== "test")

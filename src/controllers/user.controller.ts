@@ -50,8 +50,15 @@ export async function createUser(
             StatusCodes.BAD_REQUEST,
         );
 
-    if (await User.exists({ username }))
+    const exsistingUser = await User.findOne({
+        $or: [{ email }, { username }],
+    });
+
+    if (exsistingUser && exsistingUser.username === username)
         throw new ServerError("Username already exists", StatusCodes.CONFLICT);
+
+    if (exsistingUser && exsistingUser.email === email)
+        throw new ServerError("Email already exists", StatusCodes.CONFLICT);
 
     const user = await User.create({
         name,

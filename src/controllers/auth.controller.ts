@@ -1,9 +1,16 @@
-import { JWT_SECRET } from "@config";
+import { ENV } from "@config";
 import { ServerError } from "@errors/ServerError.error.js";
+import { logger } from "@logger";
 import { User } from "@models/user.model.js";
+import {
+    generateAccessToken,
+    generateAccessTokenFromUser,
+    generateRefreshToken,
+    verifyRefreshToken,
+} from "@services/auth.js";
+import { redis } from "@utils/database/redis.js";
 import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import jwt from "jsonwebtoken";
 
 interface LoginRequest {
     username: string;
@@ -12,12 +19,6 @@ interface LoginRequest {
 
 interface LoginResponse {
     token: string;
-}
-
-interface Payload {
-    id: string;
-    username: string;
-    email: string;
 }
 
 export async function login(
@@ -37,17 +38,64 @@ export async function login(
     if (!user || !(await user.comparePassword(password)))
         throw new ServerError("Invalid credentials", StatusCodes.UNAUTHORIZED);
 
-    const payload: Payload = {
-        id: String(user._id),
-        username: user.username,
-        email: user.email,
-    };
+    const refreshToken = await generateRefreshToken(user);
+    const accessToken = generateAccessTokenFromUser(user);
 
-    const token: string = jwt.sign(payload, JWT_SECRET, {
-        expiresIn: "1h",
+    res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: ENV === "production",
+        sameSite: "strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.status(StatusCodes.OK).json({
-        token,
+        token: accessToken,
     });
+}
+
+interface LogoutResponse {
+    message: string;
+}
+
+export async function logout(
+    req: Request,
+    res: Response<LogoutResponse>,
+): Promise<void> {
+    const refreshToken = String(req.cookies.refreshToken);
+
+    if (refreshToken) {
+        await redis.del(`refresh:${refreshToken}`);
+        res.clearCookie("refreshToken");
+    }
+
+    res.status(StatusCodes.OK).json({ message: "Logged out successfully" });
+}
+
+interface RefreshResponse {
+    token: string;
+}
+
+export async function refresh(
+    req: Request,
+    res: Response<RefreshResponse>,
+): Promise<void> {
+    const refreshToken = String(req.cookies.refreshToken);
+
+    if (!refreshToken)
+        throw new ServerError(
+            "No refresh token provided",
+            StatusCodes.UNAUTHORIZED,
+        );
+
+    const payload = await verifyRefreshToken(refreshToken);
+
+    if (!payload)
+        throw new ServerError(
+            "Invalid refresh token",
+            StatusCodes.UNAUTHORIZED,
+        );
+
+    const accessToken = generateAccessToken(payload);
+
+    res.status(StatusCodes.OK).json({ token: accessToken });
 }
