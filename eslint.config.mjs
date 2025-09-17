@@ -2,19 +2,19 @@ import tseslint from "typescript-eslint";
 import eslint from "@eslint/js";
 import { globalIgnores } from "eslint/config";
 
-export default tseslint.config(
+export default [
     eslint.configs.recommended,
-    tseslint.configs.recommendedTypeChecked,
-    tseslint.configs.stylisticTypeChecked,
+    ...tseslint.configs.recommendedTypeChecked,
+    ...tseslint.configs.stylisticTypeChecked,
     {
         languageOptions: {
             parserOptions: {
-                projectService: true,
+                project: "./tsconfig.json",
                 tsconfigRootDir: import.meta.dirname,
             },
         },
     },
-    globalIgnores(["eslint.config.mjs", "dist/**/*", "vite.config.js"]),
+    globalIgnores(["node_modules/", "dist/", "*.config.{js,mjs,ts}"]),
     {
         rules: {
             "@typescript-eslint/no-unused-vars": [
@@ -23,4 +23,4 @@ export default tseslint.config(
             ],
         },
     },
-);
+];
