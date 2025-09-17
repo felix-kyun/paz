@@ -1,3 +1,7 @@
+import type { Request, Response } from "express";
+import { Router } from "express";
+import { StatusCodes } from "http-status-codes";
+
 import {
     ENV,
     JWT_SECRET,
@@ -5,9 +9,6 @@ import {
     LOGFILE,
     MONGO_URI,
 } from "@/utils/config/config.js";
-import { Router } from "express";
-import { StatusCodes } from "http-status-codes";
-import type { Request, Response } from "express";
 
 export const debugRouter: Router = Router();
 

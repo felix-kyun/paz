@@ -1,5 +1,6 @@
-import { login, logout, refresh } from "@/controllers/auth.controller.js";
 import { Router } from "express";
+
+import { login, logout, refresh } from "@/controllers/auth.controller.js";
 
 export const authRouter: Router = Router();
 

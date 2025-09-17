@@ -1,7 +1,7 @@
 import { REDIS_URI } from "@config";
 import { logger } from "@logger";
-import { createClient } from "redis";
 import type { RedisClientType } from "redis";
+import { createClient } from "redis";
 
 // separate into function just to stop ts from complaining
 // about how createClient return is an error

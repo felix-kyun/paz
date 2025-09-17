@@ -1,7 +1,8 @@
-import type { Request, Response } from "express";
 import { User } from "@models/user.model.js";
-import { ServerError } from "@/errors/ServerError.error.js";
+import type { Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
+
+import { ServerError } from "@/errors/ServerError.error.js";
 
 interface IUser {
     id: string;

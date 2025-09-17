@@ -1,6 +1,5 @@
 import { ENV } from "@config";
 import { ServerError } from "@errors/ServerError.error.js";
-import { logger } from "@logger";
 import { User } from "@models/user.model.js";
 import {
     generateAccessToken,

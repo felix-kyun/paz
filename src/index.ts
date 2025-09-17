@@ -1,17 +1,17 @@
-import express, { type Express } from "express";
-import cors from "cors";
-import helmet from "helmet";
 import { ENV, PORT } from "@config";
 import { logger } from "@logger";
-import { notFoundMiddleware } from "@middlewares/notFound.middleware.js";
 import { errorHandler } from "@middlewares/error.middleware.js";
+import { loggerMiddleware } from "@middlewares/logger.middleware.js";
+import { notFoundMiddleware } from "@middlewares/notFound.middleware.js";
+import { authRouter } from "@routes/auth.routes.js";
 import { debugRouter } from "@routes/debug.routes.js";
 import { userRouter } from "@routes/user.routes.js";
 import { connectMongo } from "@utils/database/mongo.js";
-import { authRouter } from "@routes/auth.routes.js";
-import { loggerMiddleware } from "@middlewares/logger.middleware.js";
 import { connectRedis } from "@utils/database/redis.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import express, { type Express } from "express";
+import helmet from "helmet";
 
 logger.info("Starting server...");
 const app: Express = express();

@@ -1,5 +1,5 @@
-import { config } from "dotenv";
 import { parseNumber } from "@utils/parseNumber.js";
+import { config } from "dotenv";
 
 // __dirname resolves to project root
 export const __dirname = process.cwd();

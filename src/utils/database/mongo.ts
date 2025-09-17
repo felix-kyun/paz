@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
 import { MONGO_URI } from "@config";
 import { logger } from "@logger";
+import mongoose from "mongoose";
 
 export async function connectMongo(): Promise<void> {
     try {

@@ -1,5 +1,6 @@
 import request from "supertest";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
+
 import app from "@/index.js";
 
 describe("Test for non-existing routes", () => {
