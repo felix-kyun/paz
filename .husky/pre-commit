@@ -1,2 +1,4 @@
 pnpm format
-pnpm test
+docker compose up -d
+docker compose exec -T app pnpm test
+docker compose down
