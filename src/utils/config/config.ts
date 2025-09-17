@@ -1,26 +1,33 @@
 import { config } from "dotenv";
 import { parseNumber } from "@utils/parseNumber.js";
 
-// load env file according to NODE_ENV
-const ext: Record<string, string> = {
-    development: ".dev.env",
-    production: ".env",
-    test: ".test.env",
-};
-
 // __dirname resolves to project root
 export const __dirname = process.cwd();
 export const ENV: string = process.env.NODE_ENV ?? "development";
 
-/* load config file */
+/* load base config file */
 config({
-    path: ext[ENV] ?? ".env",
+    path: ".env",
     quiet: true,
 });
 
+/* override if in testing mode */
+if (ENV === "test")
+    config({
+        path: ".env.test",
+        override: true,
+        quiet: true,
+    });
+
+// app
 export const PORT = parseNumber(process.env.PORT, 3000);
 export const LOGFILE = process.env.LOGFILE ?? "app.log";
 export const LOG_LEVEL = process.env.LOG_LEVEL ?? "info";
+// secrets
 export const JWT_SECRET = process.env.JWT_SECRET ?? "your_jwt_secret";
+export const JWT_REFRESH_SECRET =
+    process.env.JWT_REFRESH_SECRET ?? "your_jwt_refresh_secret";
+// db
 export const MONGO_URI =
-    process.env.MONGO_URI ?? "mongodb://localhost:27017/mydb";
+    process.env.MONGO_URI ?? "mongodb://localhost:27017/Paz";
+export const REDIS_URI = process.env.REDIS_URI ?? "redis://localhost:6379";
