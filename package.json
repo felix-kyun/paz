@@ -1,7 +1,7 @@
 {
-    "name": "anitsu",
+    "name": "Paz",
     "version": "0.0.1",
-    "description": "Minimal Anime Streaming Website",
+    "description": "A simple and secure password manager",
     "main": "index.js",
     "type": "module",
     "scripts": {
@@ -24,7 +24,6 @@
     "packageManager": "pnpm@10.15.0",
     "dependencies": {
         "@redis/client": "^5.8.2",
-        "@types/cookie-parser": "^1.4.9",
         "bcrypt": "^6.0.0",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
@@ -43,6 +42,7 @@
         "@eslint/js": "^9.34.0",
         "@eslint/json": "^0.13.2",
         "@types/bcrypt": "^6.0.0",
+        "@types/cookie-parser": "^1.4.9",
         "@types/cors": "^2.8.19",
         "@types/express": "^5.0.3",
         "@types/jsonwebtoken": "^9.0.10",
