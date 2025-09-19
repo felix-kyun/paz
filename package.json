@@ -1,12 +1,14 @@
 {
     "name": "Paz",
     "version": "0.0.1",
-    "description": "A simple and secure password manager",
+    "description": "A simple and secure password manager. (Backend)",
     "main": "index.js",
     "type": "module",
     "scripts": {
         "start": "node dist/index.js",
         "dev": "tsx watch src/index.ts",
+        "build": "tsup",
+        "postbuild": "tsc-alias -p tsconfig.json",
         "tsc": "tsc",
         "test": "vitest",
         "prepare": "husky",
@@ -18,7 +20,16 @@
         "typecheck": "tsc --noEmit",
         "typecheck:watch": "tsc --noEmit --watch"
     },
-    "keywords": [],
+    "keywords": [
+        "password",
+        "backend",
+        "express",
+        "typescript",
+        "nodejs",
+        "mongodb",
+        "redis",
+        "password manager"
+    ],
     "author": "",
     "license": "ISC",
     "packageManager": "pnpm@10.15.0",
@@ -55,6 +66,8 @@
         "husky": "^9.1.7",
         "prettier": "^3.6.2",
         "supertest": "^7.1.4",
+        "tsc-alias": "^1.8.16",
+        "tsup": "^8.5.0",
         "tsx": "^4.20.5",
         "typescript": "^5.9.2",
         "typescript-eslint": "^8.41.0",
