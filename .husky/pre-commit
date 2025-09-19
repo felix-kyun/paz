@@ -1,4 +1,4 @@
 pnpm format
-docker compose up -d
+docker compose up -d --remove-orphans
 docker compose exec -T app pnpm test
 docker compose down
