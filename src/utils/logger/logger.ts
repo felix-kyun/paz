@@ -14,8 +14,8 @@ import { logFileTransport } from "./logFileTransport.js";
 writeFileSync(join(__dirname, LOGFILE), "");
 
 const targets: TransportSingleOptions[] = [logFileTransport];
-/* add pino pretty only when in dev mode */
-if (ENV === "development")
+/* disable logs in test mode */
+if (ENV !== "test")
     targets.push({
         target: "./pinoPrettyTransport.js",
         options: {
