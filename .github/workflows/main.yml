@@ -49,5 +49,5 @@ jobs:
                     cd ${{ secrets.VPS_PATH }};
                     docker compose -f prod.compose.yaml pull
                     docker compose -f prod.compose.yaml up -d
-                  docker prune -af
+                    docker image prune -af
                   "
