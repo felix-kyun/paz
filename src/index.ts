@@ -1,5 +1,6 @@
 import { ENV, PORT } from "@config";
 import { logger } from "@logger";
+import { csrf } from "@middlewares/csrf.middleware.js";
 import { errorHandler } from "@middlewares/error.middleware.js";
 import { loggerMiddleware } from "@middlewares/logger.middleware.js";
 import { notFoundMiddleware } from "@middlewares/notFound.middleware.js";
@@ -20,6 +21,7 @@ const app: Express = express();
 app.use(loggerMiddleware);
 app.use(cors());
 app.use(cookieParser());
+app.use(csrf());
 app.use(helmet());
 app.use(express.json());
 
