@@ -34,7 +34,6 @@ export async function getUserById(
         name: user.name,
         username: user.username,
         email: user.email,
-        age: user.age,
     });
 }
 

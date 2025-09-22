@@ -17,7 +17,8 @@ interface LoginRequest {
 }
 
 interface LoginResponse {
-    token: string;
+    name: string;
+    id: string;
 }
 
 export async function login(
@@ -52,6 +53,11 @@ export async function login(
         secure: ENV === "production",
         sameSite: "strict",
         maxAge: 15 * 60 * 1000, // 15 minutes
+    });
+
+    res.status(StatusCodes.OK).json({
+        id: user._id.toString(),
+        name: user.name,
     });
 }
 
