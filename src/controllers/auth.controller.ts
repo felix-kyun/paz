@@ -44,11 +44,14 @@ export async function login(
         httpOnly: true,
         secure: ENV === "production",
         sameSite: "strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
-    res.status(StatusCodes.OK).json({
-        token: accessToken,
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: ENV === "production",
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 15 minutes
     });
 }
 
@@ -95,6 +98,13 @@ export async function refresh(
         );
 
     const accessToken = generateAccessToken(payload);
+
+    res.cookie("accessToken", accessToken, {
+        httpOnly: true,
+        secure: ENV === "production",
+        sameSite: "strict",
+        maxAge: 15 * 60 * 1000, // 15 minutes
+    });
 
     res.status(StatusCodes.OK).json({ token: accessToken });
 }
