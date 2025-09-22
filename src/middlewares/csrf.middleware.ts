@@ -12,7 +12,7 @@ export const csrf =
             res.cookie("csrf_token", token, {
                 httpOnly: false,
                 secure: process.env.NODE_ENV === "production",
-                sameSite: "lax",
+                sameSite: "strict",
             });
         }
 

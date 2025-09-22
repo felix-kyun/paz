@@ -1,10 +1,11 @@
 import { ENV, PORT } from "@config";
 import { logger } from "@logger";
-import { csrf } from "@middlewares/csrf.middleware.js";
+import { csrf, verifyCsrf } from "@middlewares/csrf.middleware.js";
 import { errorHandler } from "@middlewares/error.middleware.js";
 import { loggerMiddleware } from "@middlewares/logger.middleware.js";
 import { notFoundMiddleware } from "@middlewares/notFound.middleware.js";
 import { authRouter } from "@routes/auth.routes.js";
+import { csrfRouter } from "@routes/csrf.routes.js";
 import { debugRouter } from "@routes/debug.routes.js";
 import { userRouter } from "@routes/user.routes.js";
 import { connectMongo } from "@utils/database/mongo.js";
@@ -26,11 +27,13 @@ app.use(helmet());
 app.use(express.json());
 
 /* Routes */
-app.use("/users", userRouter);
-app.use("/auth", authRouter);
+app.use("/api/csrf", csrfRouter);
+app.use(verifyCsrf());
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 /* Testing Routes */
-if (["development", "test"].includes(ENV)) app.use("/debug", debugRouter);
+if (["development", "test"].includes(ENV)) app.use("/api/debug", debugRouter);
 
 /* Not Found  */
 app.use(notFoundMiddleware);
