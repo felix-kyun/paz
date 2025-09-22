@@ -1,4 +1,4 @@
-import { JWT_SECRET } from "@config";
+import { JWT_REFRESH_SECRET, JWT_SECRET } from "@config";
 import type { IUser } from "@models/user.model.js";
 import { redis } from "@utils/database/redis.js";
 import jwt from "jsonwebtoken";
@@ -17,7 +17,9 @@ export async function generateRefreshToken(user: IUser): Promise<string> {
         email: user.email,
     };
 
-    const refreshToken = jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+    const refreshToken = jwt.sign(payload, JWT_REFRESH_SECRET, {
+        expiresIn: "7d",
+    });
 
     await redis.set(`refresh:${refreshToken}`, user._id.toString(), {
         EX: 7 * 24 * 60 * 60,
@@ -52,10 +54,19 @@ export async function verifyRefreshToken(
     token: string,
 ): Promise<Payload | null> {
     try {
-        const decoded = jwt.verify(token, JWT_SECRET) as Payload;
+        const decoded = jwt.verify(token, JWT_REFRESH_SECRET) as Payload;
         const exists = await redis.get(`refresh:${token}`);
 
         if (!exists) return null;
+        return decoded;
+    } catch {
+        return null;
+    }
+}
+
+export function verifyAccessToken(token: string): Payload | null {
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET) as Payload;
         return decoded;
     } catch {
         return null;
