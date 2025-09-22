@@ -9,7 +9,6 @@ interface IUser {
     name: string;
     username: string;
     email: string;
-    age: number;
     password: string;
 }
 
@@ -43,9 +42,9 @@ export async function createUser(
     req: Request<unknown, IUserResponse, IUserRequest>,
     res: Response<IUserResponse>,
 ): Promise<void> {
-    const { name, username, email, age, password } = req.body;
+    const { name, username, email, password } = req.body;
 
-    if (!name || !username || !password || !age || !email)
+    if (!name || !username || !password || !email)
         throw new ServerError(
             "Missing required fields",
             StatusCodes.BAD_REQUEST,
@@ -65,7 +64,6 @@ export async function createUser(
         name,
         username,
         email,
-        age,
         password,
     });
 
@@ -74,6 +72,5 @@ export async function createUser(
         name,
         username,
         email,
-        age,
     });
 }
